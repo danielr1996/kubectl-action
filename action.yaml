@@ -1,0 +1,12 @@
+name: 'docker-action'
+description: 'Deploy to a Kubernetes cluster'
+author: 'Daniel Richter'
+branding:
+  icon: 'cloud'
+  color: 'blue'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+inputs:
+  kubeconfig:
+    description: 'base64 encoded .kube/config'
