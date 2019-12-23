@@ -1,6 +1,6 @@
-# kubectl action
+# Kubectl Action
 
-This action can be used to interact with the kubectl command line utility.
+This action allows you to deploy to a kubernetes cluster.
 
 ## Inputs
 
@@ -11,10 +11,13 @@ Base64 encoded `.kube/config`
 cat .kube/config | base64
 ```
 
-## Example usage
-```
-- name: Kustomize
-  uses: ./.github/actions/kubectl-action
+## Usage usage
+```yaml
+- uses: rlespinasse/github-slug-action@master
+- uses: danielr1996/kubectl-action@0.1.0
   with:
-    args: kustomize deployment/overlays/replace > replace.yaml
+    kubeconfig: ${{ secrets.KUBE_CONFIG }}
+  env:
+    VERSION: ${{ env.GITHUB_SHA_SHORT }}
+    INSTANCE: ${{ env.GITHUB_REF_SLUG }}
 ```
