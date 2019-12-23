@@ -1,4 +1,4 @@
-name: 'docker-action'
+name: 'kubectl-action'
 description: 'Deploy to a Kubernetes cluster'
 author: 'Daniel Richter'
 branding:
