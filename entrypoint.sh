@@ -10,8 +10,5 @@ echo #########################
 mkdir -p ~/.kube
 echo $INPUT_KUBECONFIG | base64 -d > ~/.kube/config
 
-# Print deployment.yaml
-cat deployment.yaml
-
 # Deploy deployment.yaml
 sh -c "kubectl $*"
