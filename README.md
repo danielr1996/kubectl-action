@@ -4,7 +4,7 @@ This action allows you to deploy to a kubernetes cluster.
 
 Alternatives:
 
--
+- [steebchen/kubectl](https://github.com/marketplace/actions/kubernetes-cli-kubectl)
 ## Inputs
 
 ### `kubeconfig`
