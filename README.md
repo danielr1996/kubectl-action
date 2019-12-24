@@ -2,6 +2,9 @@
 
 This action allows you to deploy to a kubernetes cluster.
 
+Alternatives:
+
+-
 ## Inputs
 
 ### `kubeconfig`

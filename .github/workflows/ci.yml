@@ -1,0 +1,15 @@
+name: Build Pipeline
+
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: touch test.txt
+      - uses: ./
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+        env:
+          VERSION: ${{ env.GITHUB_SHA_SHORT }}
+          INSTANCE: ${{ env.GITHUB_REF_SLUG }}

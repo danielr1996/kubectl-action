@@ -1,8 +1,7 @@
 FROM alpine
-WORKDIR /opt/
 RUN apk --update add curl gettext
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-RUN chmod a+x /opt/kubectl
-COPY entrypoint.sh entrypoint.sh
-RUN chmod a+x /opt/entrypoint.sh
-ENTRYPOINT ["/opt/entrypoint.sh"]
+RUN curl -L -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod a+x /usr/local/bin/kubectl
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod a+x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
