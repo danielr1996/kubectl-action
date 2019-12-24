@@ -10,5 +10,5 @@ jobs:
       - uses: ./
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
-          args: config-view
+          args: config view
 
