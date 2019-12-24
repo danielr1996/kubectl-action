@@ -6,9 +6,66 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: touch test.txt
+      - run: |
+          echo "apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  labels:
+                    run: echo
+                  name: echo
+                spec:
+                  replicas: 2
+                  selector:
+                    matchLabels:
+                      run: echo
+                  template:
+                    metadata:
+                      labels:
+                        run: echo
+                    spec:
+                      containers:
+                        - name: echo
+                          image: jmalloc/echo-server
+                          ports:
+                            - containerPort: 8080
+
+                ---
+                apiVersion: v1
+                kind: Service
+                metadata:
+                  labels:
+                    run: echo
+                  name: echo
+                  annotations:
+                    haproxy.org/check: "enabled"
+                    haproxy.org/forwarded-for: "enabled"
+                    haproxy.org/load-balance: "roundrobin"
+                spec:
+                  selector:
+                    run: echo
+                  ports:
+                    - name: port-1
+                      port: 80
+                      protocol: TCP
+                      targetPort: 8080
+
+                ---
+                apiVersion: networking.k8s.io/v1beta1
+                kind: Ingress
+                metadata:
+                  name: echo
+                  namespace: default
+                spec:
+                  rules:
+                    - host: echo.danielr1996.de
+                      http:
+                        paths:
+                          - path: /
+                            backend:
+                              serviceName: echo
+                              servicePort: 80" > deployment.yaml
       - uses: ./
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
-          args: config view
+          args: apply -f deployment.yaml
 
