@@ -1,5 +1,7 @@
 # Kubectl Action
 
+> I archived this repository because I think there are now more appropriate options like helm and argocd
+
 This action allows you to deploy to a kubernetes cluster.
 
 Alternatives:
